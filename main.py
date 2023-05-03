@@ -13,19 +13,28 @@ y_axis = st.selectbox("Select data for y-axis: ",
 st.subheader(f"{x_axis} and {y_axis}")
 
 
-def get_data(x_axis, y_axis):
+# def get_data(x_axis, y_axis):
+#     data = pd.read_csv("happy.csv")
+#     values = data.get([x_axis.lower(), y_axis.lower()])
+
+#     return values.to_dict(orient="records")
+
+
+# value = get_data(x_axis, y_axis)
+# x_value = []
+# y_value = []
+# for i in value:
+#     x_value.append(i[x_axis.lower()])
+#     y_value.append(i[y_axis.lower()])
+
+def get_data(axis):
     data = pd.read_csv("happy.csv")
-    values = data.get([x_axis.lower(), y_axis.lower()])
 
-    return values.to_dict(orient="records")
+    return data[axis.lower()]
 
 
-value = get_data(x_axis, y_axis)
-x_value = []
-y_value = []
-for i in value:
-    x_value.append(i[x_axis.lower()])
-    y_value.append(i[y_axis.lower()])
+x_value = get_data(x_axis)
+y_value = get_data(y_axis)
 
 figure = pt.scatter(x=x_value, y=y_value, labels={"x": x_axis, "y": y_axis})
 
